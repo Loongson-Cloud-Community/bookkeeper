@@ -132,7 +132,7 @@
     <freebuilder.version>2.7.0</freebuilder.version>
     <google.code.version>3.0.2</google.code.version>
     <google.errorprone.version>2.9.0</google.errorprone.version>
-    <grpc.version>1.47.0</grpc.version>
+    <grpc.version>1.44.2</grpc.version>
     <guava.version>31.0.1-jre</guava.version>
     <kerby.version>1.1.1</kerby.version>
     <hadoop.version>3.3.5</hadoop.version>
@@ -203,7 +203,7 @@
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
     <dependency-check-maven.version>8.0.2</dependency-check-maven.version>
     <nar-maven-plugin.version>3.10.1</nar-maven-plugin.version>
-    <os-maven-plugin.version>1.4.1.Final</os-maven-plugin.version>
+    <os-maven-plugin.version>1.7.1</os-maven-plugin.version>
     <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
     <puppycrawl.checkstyle.version>9.3</puppycrawl.checkstyle.version>
     <spotbugs-maven-plugin.version>4.7.3.2</spotbugs-maven-plugin.version>
@@ -477,6 +477,12 @@
         <artifactId>netty-incubator-transport-native-io_uring</artifactId>
         <version>${netty-iouring.version}</version>
         <classifier>linux-aarch_64</classifier>
+      </dependency>
+      <dependency>
+        <groupId>io.netty.incubator</groupId>
+        <artifactId>netty-incubator-transport-native-io_uring</artifactId>
+        <version>${netty-iouring.version}</version>
+        <classifier>linux-loongarch64</classifier>
       </dependency>
 
       <!-- grpc dependencies -->
@@ -1293,6 +1299,18 @@
       </activation>
       <properties>
         <nar.aolProperties>src/aarch64_aol.properties</nar.aolProperties>
+      </properties>
+    </profile>
+    <profile>
+      <id>loongarch64-linux-nar-aol</id>
+      <activation>
+        <os>
+          <family>linux</family>
+          <arch>loongarch64</arch>
+        </os>
+      </activation>
+      <properties>
+        <nar.aolProperties>src/loongarch64_aol.properties</nar.aolProperties>
       </properties>
     </profile>
     <profile>
