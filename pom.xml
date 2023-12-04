@@ -141,7 +141,7 @@
     <jetty.version>9.4.33.v20201020</jetty.version>
     <jmh.version>1.19</jmh.version>
     <jmock.version>2.8.2</jmock.version>
-    <jna.version>3.2.7</jna.version>
+    <jna.version>4.2.0</jna.version>
     <junit.version>4.12</junit.version>
     <libthrift5.version>0.5.0-1</libthrift5.version>
     <libthrift9.version>0.12.0</libthrift9.version>
@@ -192,7 +192,7 @@
     <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
     <nar-maven-plugin.version>3.5.2</nar-maven-plugin.version>
-    <os-maven-plugin.version>1.4.1.Final</os-maven-plugin.version>
+    <os-maven-plugin.version>1.7.1</os-maven-plugin.version>
     <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
     <puppycrawl.checkstyle.version>6.19</puppycrawl.checkstyle.version>
     <spotbugs-maven-plugin.version>3.1.8</spotbugs-maven-plugin.version>
@@ -408,7 +408,7 @@
         <groupId>io.netty</groupId>
         <artifactId>netty-transport-native-epoll</artifactId>
         <version>${netty.version}</version>
-        <classifier>linux-x86_64</classifier>
+        <classifier>linux-loongarch_64</classifier>
       </dependency>
       <dependency>
         <groupId>io.netty</groupId>
@@ -465,6 +465,13 @@
         <groupId>org.rocksdb</groupId>
         <artifactId>rocksdbjni</artifactId>
         <version>${rocksdb.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.netty.incubator</groupId>
+        <artifactId>netty-incubator-transport-native-io_uring</artifactId>
+        <version>${netty-iouring.version}</version>
+        <classifier>linux-loongarch64</classifier>
       </dependency>
 
       <!-- zookeeper dependencies -->
@@ -1100,6 +1107,19 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+
+    <profile>
+      <id>loongarch64-linux-nar-aol</id>
+      <activation>
+        <os>
+          <family>linux</family>
+          <arch>loongarch64</arch>
+        </os>
+      </activation>
+      <properties>
+        <nar.aolProperties>src/loongarch64_aol.properties</nar.aolProperties>
+      </properties>
     </profile>
 
     <profile>

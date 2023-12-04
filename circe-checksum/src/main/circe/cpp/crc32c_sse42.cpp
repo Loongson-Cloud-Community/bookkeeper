@@ -16,6 +16,22 @@
 #include "../include/crc32c_sse42.hpp"
 
 #include <assert.h>
+#ifdef __loongarch__
+static bool has_sse42 = false;
+
+bool crc32c_initialize() {
+    return has_sse42;
+}
+chunk_config::chunk_config(size_t words, const chunk_config* next) : words(words), next(next) {
+    assert(0);
+}
+void chunk_config::make_shift_table(size_t bytes, uint32_t table[256]) {
+    assert(0);
+}
+uint32_t crc32c(uint32_t init, const void *buf, size_t len, const chunk_config* config) {
+    assert(0);
+}
+#else
 #include <nmmintrin.h> // SSE4.2
 #include <wmmintrin.h> // PCLMUL
 
@@ -215,3 +231,4 @@ uint32_t crc32c(uint32_t init, const void *buf, size_t len, const chunk_config* 
     DEBUG_PRINTF1("crc = 0x%08x\n", crc);
     return crc;
 }
+#endif
